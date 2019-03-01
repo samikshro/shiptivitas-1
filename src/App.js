@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import HomeTab from './HomeTab';
 import Navigation from './Navigation';
@@ -12,6 +13,7 @@ class App extends Component {
       selectedTab: 'home',
     };
   }
+
   renderShippingRequests() {
     return (<Board />);
   }
@@ -50,5 +52,6 @@ class App extends Component {
     });
   }
 }
+ReactDOM.render(<App />, document.getElementById('root'));
 
 export default App;

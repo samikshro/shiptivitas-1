@@ -3,4 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// const doggy = <h1> Yes, it worked!!!</h1>;
+//ReactDOM.render(doggy, document.getElementById('root'));
+//<App />
+//ReactDOM.render(HomeTab.js,document.getElementById('root'));
