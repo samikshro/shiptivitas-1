@@ -3,7 +3,6 @@ import Dragula from 'dragula';
 import 'dragula/dist/dragula.css';
 import Swimlane from './Swimlane';
 import './Board.css';
-import { dragula } from 'dragula' 
 
 export default class Board extends React.Component {
   constructor(props) {
@@ -16,18 +15,29 @@ export default class Board extends React.Component {
         complete: clients.filter(client => client.status && client.status === 'complete'),
       }
     }
+
     this.swimlanes = {
       backlog: React.createRef(),
       inProgress: React.createRef(),
       complete: React.createRef(),
     }
 
-    
-
-    
-    
-
+    this.containers = []
   }
+
+  componentDidMount() {
+    const drake = Dragula(this.containers, {revertOnSpill: true})
+    .on('drop', function (el, target) {
+      if(target.id === 'In Progress'){
+        el.className = 'Card Card-blue gu-transit';
+      } else if(target.id === 'Backlog'){
+        el.className = 'Card Card-grey gu-transit'
+      } else if(target.id === 'Complete'){
+        el.className = 'Card Card-green gu-transit'
+      }
+    })
+  }
+
   getClients() {
     return [
       ['1','Stark, White and Abbott','Cloned Optimal Architecture', 'in-progress'],
@@ -84,9 +94,7 @@ export default class Board extends React.Component {
   }
   dragulaDecorator = (componentBackingInstance) => {
     if (componentBackingInstance) {
-      let options = { };
-      Dragula([componentBackingInstance], options);
+      this.containers.push(componentBackingInstance)
     }
   }
-  
 }
